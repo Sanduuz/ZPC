@@ -99,7 +99,7 @@ class Windows:
         startTime = time.time()
 
         parser = optparse.OptionParser("Usage: "+ "python ZPC.py -f <ZipFile> -w <Wordlist> | See -h/--help for more info.")
-        parser.add_option('-f', dest='zname', type='string', help="Specify ZipFile")
+        parser.add_option('-f', dest='zname', type='string', help="Specify Zip file")
         parser.add_option('-w', dest='dname', type='string', help="Specify Wordlist")
         parser.add_option('--dv', dest='verbose', default=True, action="store_false", help="Disable Verbosity")
         parser.add_option('--dl', dest='DynamicLine', default=False, action="store_true", help="Enable Dynamic line updates.")
