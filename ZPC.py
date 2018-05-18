@@ -30,7 +30,7 @@ class Linux:
         except:
             if verbosity == True:
                 if dynamicLineUpdate == True:
-                    sys.stdout.write(linuxZPC.colors.blue+'\r[*] Trying Password Number'+linuxZPC.colors.magenta+' '+str(passNum)+' '+linuxZPC.colors.blue+'Out Of'+linuxZPC.colors.magenta+' '+str(listLength)+' '+linuxZPC.colors.blue+'Possibilities | Trying Password:'+linuxZPC.colors.magenta+' '+str(password)+linuxZPC.colors.default)
+                    sys.stdout.write(linuxZPC.colors.blue+'\r[*] Trying Password Number'+linuxZPC.colors.magenta+' '+str(passNum)+' '+linuxZPC.colors.blue+'Out Of'+linuxZPC.colors.magenta+' '+str(listLength)+' '+linuxZPC.colors.blue+'Possibilities | Trying Password:'+linuxZPC.colors.magenta+' '+str(password)+linuxZPC.colors.default+'										')
                     sys.stdout.flush()
                 else:
                     print linuxZPC.colors.blue+'[*] Trying Password Number'+linuxZPC.colors.magenta+' '+str(passNum)+' '+linuxZPC.colors.blue+'Out Of'+linuxZPC.colors.magenta+' '+str(listLength)+' '+linuxZPC.colors.blue+'Possibilities | Trying Password:'+linuxZPC.colors.magenta+' '+str(password)+''+linuxZPC.colors.default
@@ -85,7 +85,7 @@ class Windows:
         except:
             if verbosity == True:
                 if dynamicLineUpdate == True:
-                    sys.stdout.write('\r[*] Trying Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities | Trying Password: '+str(password))
+                    sys.stdout.write('\r[*] Trying Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities | Trying Password: '+str(password)+'						')
                     sys.stdout.flush()
                 else:
                     print '[*] Trying Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities | Trying Password: '+str(password)
