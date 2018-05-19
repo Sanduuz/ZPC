@@ -1,0 +1,41 @@
+INSTRUCTIONS FOR ABSOLUTE BEGINNERS!
+If you don't understand something or you encounter some errors, feel free to message me on Instagram @sanduuz or E-mail me 19jdmz5js@protonmail.ch
+
+READ EVERYTHING BEFORE DOING ANYTHING.
+
+Linux:
+    If you are using linux, I assume you don't need this. But just in case, here are the instructions.
+    -----
+    1. Setting up Python
+        - To do this, simply type in `python --version`. See if the version matches 2.*.*. If the version is 3.*.*, try out `python2 --version`.
+          If you get an error saying python or python2 is not installed. Install python, but first make sure the packages are updated.
+          Run these commands, `sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y`, `sudo apt-get install python`,
+          `sudo apt-get install python2`.
+          If everything went smoothly, python should now be installed. Check if python is version 2.*.*. (python --version or python2 --version)
+            (Note: ZPC is tested in Python 2.7.13)
+    2. Running ZPC.py
+        - Just run `python ZPC.py` or `python2 ZPC.py`. To get additional info try the help flag. (`python ZPC.py -h` or `python2 ZPC.py -h`)
+          (See basic usage from README.md)
+
+Windows:
+    1. Setting up Python
+        - If you have python2 installed and set to the PATH, just run `python ZPC.py`.
+          To install Python, head on to https://python.org and download python2. (I'd recommend python2.7.13)
+          Choose to add python to PATH and go on with the installation process.
+    2. Setting Python to PATH
+        - If you chose to add python to PATH on the installation, you can skip this step.
+          Go to, 'My Computer > Properties > Advanced System Settings > Environment Variables', and search for a variable called PATH.
+          Edit the Environment Variable called PATH and add `;C:\Python27` to the end. (`;C:\Python*version number*`, for example, if I have
+          Python 2.2 installed, I would add `;C:\Python22` in the end of PATH.) This step might be confusing, so feel free to message me on
+          Instagram @sanduuz or E-mail me 19jdmz5js@protonmail.ch. If there is no Environment Variable called PATH found, create a new one
+          and name it as 'PythonPath'. The value of PythonPath should be `C:\Python27`. [Note: The semicolon (;) at the beginning of C:\Python27,
+          is just if there isn't a semicolon in the first place. The semicolons separate the values from eachother.]
+    3. Running ZPC.py
+        - If everything went smoothly so far, you can check whether everything is correctly set up by opening up CMD.exe or Powershell.exe, and
+          typing in python. If you have set up the Python correctly to the PATH, an interactive python shell should open up. To exit the shell,
+          type `exit()`. Now if you got everything correct so far, you can start using ZPC.
+        - Change directories on CMD.exe or Powershell.exe to the directory where ZPC is located. (cd C:\Path\To\ZPC).
+          Run ZPC by typing on CMD.exe or Powershell.exe `python ZPC.py`. To see additional help, run `python ZPC.py -h`.
+
+AND THERE YOU GO, FULL INSTRUCTIONS OF HOW TO SET UP ZPC.
+If you've encountered any problems during this process, please contact me on Instagram @sanduuz or via E-mail 19jdmz5js@protonmail.ch
