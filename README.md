@@ -32,7 +32,7 @@ You can contact me at:
 * Instagram: @sanduuz
 * E-mail: 19jdmz5js@protonmail.ch
 * Wickr: @sanduuz
-* Wire: @\_sanduuz_
+* Wire: @sanduuz
 
 ---
 
