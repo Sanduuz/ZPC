@@ -27,7 +27,7 @@ class Linux:
         try:
             zFile.extractall(pwd=password)
             return password
-        except:
+        except RuntimeError:
             try:
                 if verbosity == True:
                     if dynamicLineUpdate == True:
@@ -65,23 +65,26 @@ class Linux:
                 global dynamicLineUpdate
                 dynamicLineUpdate = options.DynamicLine
 
-            zFile = zipfile.ZipFile(zname)
-            with open(dname, 'r') as passFile:
-                getListLength(dname)
-                count = 1.0
-                for line in passFile.readlines():
-                    password = line.strip('\n')
-                    percentage = int(count / listLength * 100)
-                    passNum += 1
-                    count += 1
-                    guess = linuxZPC.extractFile(zFile, password, percentage)
-                    if guess:
-                        print linuxZPC.colors.bold+linuxZPC.colors.green+'\n[+] '+linuxZPC.colors.underl+'Password Found'+linuxZPC.colors.reset+linuxZPC.colors.bold+linuxZPC.colors.green+': '+linuxZPC.colors.white+password+linuxZPC.colors.green+' | Password Number '+linuxZPC.colors.white+str(passNum)+linuxZPC.colors.green+' Out Of '+linuxZPC.colors.white+str(listLength)+linuxZPC.colors.green+' Possibilities.\n'
-                        print linuxZPC.colors.white+"Time Elapsed: "+str(time.time()-startTime)
-                        exit(0)
-                    elif passNum >= listLength:
-                        print linuxZPC.colors.bold+linuxZPC.colors.red+'\n[!] '+linuxZPC.colors.underl+'No Correct Password Found'+linuxZPC.colors.reset+linuxZPC.colors.red+'!'+linuxZPC.colors.default
-                        print linuxZPC.colors.white+"\nTime Elapsed: "+str(time.time()-startTime)
+            try:
+                zFile = zipfile.ZipFile(zname)
+                with open(dname, 'r') as passFile:
+                    getListLength(dname)
+                    count = 1.0
+                    for line in passFile.readlines():
+                        password = line.strip('\n')
+                        percentage = int(count / listLength * 100)
+                        passNum += 1
+                        count += 1
+                        guess = linuxZPC.extractFile(zFile, password, percentage)
+                        if guess:
+                            print linuxZPC.colors.bold+linuxZPC.colors.green+'\n[+] '+linuxZPC.colors.underl+'Password Found'+linuxZPC.colors.reset+linuxZPC.colors.bold+linuxZPC.colors.green+': '+linuxZPC.colors.white+password+linuxZPC.colors.green+' | Password Number '+linuxZPC.colors.white+str(passNum)+linuxZPC.colors.green+' Out Of '+linuxZPC.colors.white+str(listLength)+linuxZPC.colors.green+' Possibilities.\n'
+                            print linuxZPC.colors.white+"Time Elapsed: "+str(time.time()-startTime)
+                            exit(0)
+                        elif passNum >= listLength:
+                            print linuxZPC.colors.bold+linuxZPC.colors.red+'\n[!] '+linuxZPC.colors.underl+'No Correct Password Found'+linuxZPC.colors.reset+linuxZPC.colors.red+'!'+linuxZPC.colors.default
+                            print linuxZPC.colors.white+"\nTime Elapsed: "+str(time.time()-startTime)
+            except IOError:
+                exit(linuxZPC.colors.bold+linuxZPC.colors.red+"[!] ZIP/Wordlist File Not Found!")
         except KeyboardInterrupt:
             exit(linuxZPC.colors.bold+linuxZPC.colors.red+'\n[!] ^C Detected!\nExiting...')
 
@@ -90,7 +93,7 @@ class Windows:
         try:
             zFile.extractall(pwd=password)
             return password
-        except:
+        except RuntimeError:
             if verbosity == True:
                 if dynamicLineUpdate == True:
                     sys.stdout.write('\r[*] Trying Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities ['+str(percentage)+'%] | Trying Password: '+str(password)+'						')
@@ -101,46 +104,52 @@ class Windows:
                 exit('[!] Dynamic line updates can\'t be True if verbosity is False!')
 
     def main(self):
-        global passNum
-        passNum = 0
+        try:
+            global passNum
+            passNum = 0
 
-        startTime = time.time()
+            startTime = time.time()
 
-        parser = optparse.OptionParser("Usage: "+ "python ZPC.py -f <ZipFile> -w <Wordlist> | See -h/--help for more info.")
-        parser.add_option('-f', dest='zname', type='string', help="Specify Zip file")
-        parser.add_option('-w', dest='dname', type='string', help="Specify Wordlist")
-        parser.add_option('--dv', dest='verbose', default=True, action="store_false", help="Disable Verbosity")
-        parser.add_option('--dl', dest='DynamicLine', default=False, action="store_true", help="Enable Dynamic line updates.")
+            parser = optparse.OptionParser("Usage: "+ "python ZPC.py -f <ZipFile> -w <Wordlist> | See -h/--help for more info.")
+            parser.add_option('-f', dest='zname', type='string', help="Specify Zip file")
+            parser.add_option('-w', dest='dname', type='string', help="Specify Wordlist")
+            parser.add_option('--dv', dest='verbose', default=True, action="store_false", help="Disable Verbosity")
+            parser.add_option('--dl', dest='DynamicLine', default=False, action="store_true", help="Enable Dynamic line updates.")
 
-        (options, args) = parser.parse_args()
+            (options, args) = parser.parse_args()
 
-        if (options.zname == None) | (options.dname == None):
-            exit(parser.usage)
-        else:
-            zname = options.zname
-            dname = options.dname
-            global verbosity
-            verbosity = options.verbose
-            global dynamicLineUpdate
-            dynamicLineUpdate = options.DynamicLine
+            if (options.zname == None) | (options.dname == None):
+                exit(parser.usage)
+            else:
+                zname = options.zname
+                dname = options.dname
+                global verbosity
+                verbosity = options.verbose
+                global dynamicLineUpdate
+                dynamicLineUpdate = options.DynamicLine
 
-        zFile = zipfile.ZipFile(zname)
-        with open(dname, 'r') as passFile:
-            getListLength(dname)
-            count = 1.0
-            for line in passFile.readlines():
-                password = line.strip('\n')
-                percentage = int(count / listLength * 100)
-                passNum += 1
-                count += 1
-                guess = windowsZPC.extractFile(zFile, password, percentage)
-                if guess:
-                    print '\n[+] Password Found: '+password+' | Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities.\n'
-                    print "Time Elapsed: "+str(time.time()-startTime)
-                    exit(0)
-                elif passNum >= listLength:
-                    print '\n[!] No Correct Password Found!'
-                    print "\nTime Elapsed: "+str(time.time()-startTime)
+            try:
+                zFile = zipfile.ZipFile(zname)
+                with open(dname, 'r') as passFile:
+                    getListLength(dname)
+                    count = 1.0
+                    for line in passFile.readlines():
+                        password = line.strip('\n')
+                        percentage = int(count / listLength * 100)
+                        passNum += 1
+                        count += 1
+                        guess = windowsZPC.extractFile(zFile, password, percentage)
+                        if guess:
+                            print '\n[+] Password Found: '+password+' | Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities.\n'
+                            print "Time Elapsed: "+str(time.time()-startTime)
+                            exit(0)
+                        elif passNum >= listLength:
+                            print '\n[!] No Correct Password Found!'
+                            print "\nTime Elapsed: "+str(time.time()-startTime)
+            except IOError:
+                exit("[!] ZIP/Wordlist File Not Found!")
+        except KeyboardInterrupt:
+            exit('\n[!] ^C Detected!\nExiting...')
 
 def getListLength(dname):
     global listLength
