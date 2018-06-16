@@ -39,6 +39,7 @@ You can contact me at:
 #### Note:
 If no correct password is found, the file will still be extracted but with no data inside. Don't get confused by that :D
 
+---
 
 ## What's New
 ### ZPC 4.0
