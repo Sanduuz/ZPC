@@ -27,7 +27,7 @@ class Linux:
         try:
             zFile.extractall(pwd=password)
             return password
-        except RuntimeError:
+        except:
             try:
                 if verbosity == True:
                     if dynamicLineUpdate == True:
@@ -93,7 +93,7 @@ class Windows:
         try:
             zFile.extractall(pwd=password)
             return password
-        except RuntimeError:
+        except:
             if verbosity == True:
                 if dynamicLineUpdate == True:
                     sys.stdout.write('\r[*] Trying Password Number '+str(passNum)+' Out Of '+str(listLength)+' Possibilities ['+str(percentage)+'%] | Trying Password: '+str(password)+'						')
